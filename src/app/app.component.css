@@ -69,8 +69,8 @@ ul {
     background: #f9cf00;
 }
 
-.menu-content {
-
+.menu-content:first-child {
+    margin-top: 10px
 }
 
 .nonveg-flag {
@@ -78,7 +78,6 @@ ul {
     height: 15px;
     background: red;
     border-radius: 35%;
-    margin: 4px
 }
 
 .veg-flag{
@@ -86,7 +85,6 @@ ul {
     height: 15px;
     background: green;
     border-radius: 35%;
-    margin: 4px
 }
 
 .menu-div {
@@ -191,4 +189,16 @@ ul {
 
 .more-padding {
     padding: 15px;
+}
+
+.disable{
+    pointer-events: none;
+  
+    /* for "disabled" effect */
+    opacity: 0.5;
+    background: #CCC;
+  }
+.food-count {
+    text-align: center;
+    width: max-content;
 }

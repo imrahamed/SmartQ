@@ -20,128 +20,72 @@
     <div class="ui-g-12 ui-g-nopad">
       <div class="ui-g-1"></div>
       <div class="ui-g-10 main-div">
-        <div class="ui-g-2">
-          <div class="ui-g-12 menu-list ui-g-nopad">
-            <ul>
-              <li [ngClass]="{'active': true}">
-                <span>All</span>
-              </li>
-              <li>
-                <span>Oriental</span>
-              </li>
-              <li>
-                <span>Chinese combos</span>
-              </li>
-              <li>
-                <span>Chinese Starter</span>
-              </li>
-              <li>
-                <span>Salads</span>
-              </li>
-            </ul>
-          </div>
+        <div class="ui-g-2 menu-list">
+          <ul>
+            <li (click)="this.setfilter('all')" [ngClass]="{'active': active === 'all'}">
+              <span>All</span>
+            </li>
+            <li (click)="this.setfilter('Oriental')" [ngClass]="{'active': active === 'Oriental'}">
+              <span>Oriental</span>
+            </li>
+            <li (click)="this.setfilter('Chinese Combos')" [ngClass]="{'active': active === 'Chinese Combos'}">
+              <span>Chinese combos</span>
+            </li>
+            <li (click)="this.setfilter('Chinese Starter')" [ngClass]="{'active': active === 'Chinese Starter'}">
+              <span>Chinese Starter</span>
+            </li>
+            <li (click)="this.setfilter('Salads')" [ngClass]="{'active': active === 'Salads'}">
+              <span>Salads</span>
+            </li>
+          </ul>
         </div>
-        <div class="ui-g-7">
-          <div class="ui-g-12 menu-div ui-g-nopad">
-            <div class="ui-g-12 ui-g-nopad">
-              <span class="ui-g-12 menu-title">Oriental</span>
-              <span class="ui-g-12 menu-content" *ngFor="let food of oriental">
+        <div class="ui-g-7 menu-div">
+          <div *ngFor="let key of menu | obj" class="ui-g-12 ui-g-nopad">
+            <span *ngIf="active === 'all' || active === key" class="ui-g-12 menu-title">{{key}}</span>
+            <div  *ngIf="active === 'all' || active === key" >
+              <span
+            class="ui-g-12 menu-content" *ngFor="let food of menu[key]">
+            <div [ngClass]="{'disable': !checkavailable(key, food.name)}">
                 <span class="ui-g-1 max-content ui-g-nopad">
-                  <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
-                </span>
-                <span class="ui-g-7 ui-g-nopad">
-                  <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
-                  <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
-                </span>
-                <span class="ui-g-2 ui-g-nopad">
-                  <span class="ui-g-3 far fa-minus-square"></span>
-                  <span class="ui-g-7 text-center some-padding">2</span>
-                  <span class="ui-g-2 far fa-plus-square no-left-pad"></span>
-                </span>
-                <span class="ui-g-2 ui-g-nopad text-center some-padding">
-                  <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
-                </span>
-              </span>
+                    <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
+                  </span>
+                  <span class="ui-g-7 ui-g-nopad">
+                    <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
+                    <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
+                  </span>
+                  <span class="ui-g-2 ui-g-nopad">
+                    <span (click)="addcart(key, food.name); " class="ui-g-3 far fa-minus-square"></span>
+                    <span class="ui-g-7 food-count">{{food.count}}</span>
+                    <span (click)="removecart(key, food.name);" class="ui-g-2 far fa-plus-square"></span>
+                  </span>
+                  <span class="ui-g-2 text-center">
+                    <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
+                  </span>
             </div>
-            <div class="ui-g-12 ui-g-nopad">
-              <span class="ui-g-12 menu-title">Chinese combos</span>
-              <span class="ui-g-12 menu-content" *ngFor="let food of cc">
-                <span class="ui-g-1 max-content ui-g-nopad">
-                  <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
-                </span>
-                <span class="ui-g-7 ui-g-nopad">
-                  <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
-                  <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
-                </span>
-                <span class="ui-g-2 ui-g-nopad">
-                  <span class="ui-g-3 far fa-minus-square"></span>
-                  <span class="ui-g-7 text-center some-padding">2</span>
-                  <span class="ui-g-2 far fa-plus-square no-left-pad"></span>
-                </span>
-                <span class="ui-g-2 ui-g-nopad text-center some-padding">
-                  <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
-                </span>
-              </span>
+              
+            </span>
             </div>
-            <div class="ui-g-12 ui-g-nopad">
-              <span class="ui-g-12 menu-title">Chinese starter</span>
-              <span class="ui-g-12 menu-content" *ngFor="let food of cs">
-                <span class="ui-g-1 max-content ui-g-nopad">
-                  <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
-                </span>
-                <span class="ui-g-7 ui-g-nopad">
-                  <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
-                  <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
-                </span>
-                <span class="ui-g-2 ui-g-nopad">
-                  <span class="ui-g-3 far fa-minus-square"></span>
-                  <span class="ui-g-7 text-center some-padding">2</span>
-                  <span class="ui-g-2 far fa-plus-square no-left-pad"></span>
-                </span>
-                <span class="ui-g-2 ui-g-nopad text-center some-padding">
-                  <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
-                </span>
-              </span>
-            </div>
-            <div class="ui-g-12 ui-g-nopad">
-              <span class="ui-g-12 menu-title">Salads</span>
-              <span class="ui-g-12 menu-content" *ngFor="let food of salads">
-                <span class="ui-g-1 max-content ui-g-nopad">
-                  <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
-                </span>
-                <span class="ui-g-7 ui-g-nopad">
-                  <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
-                  <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
-                </span>
-                <span class="ui-g-2 ui-g-nopad">
-                  <span class="ui-g-3 far fa-minus-square"></span>
-                  <span class="ui-g-7 text-center some-padding">2</span>
-                  <span class="ui-g-2 far fa-plus-square no-left-pad"></span>
-                </span>
-                <span class="ui-g-2 ui-g-nopad text-center some-padding">
-                  <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
-                </span>
-              </span>
-            </div>
+            
           </div>
+          
         </div>
         <div class="ui-g-3">
           <div class="ui-g-12 cart-div ui-g-nopad">
             <div class="ui-g-12 ui-g-nopad">
               <span class="cart-title ui-g-12">
                 <span class="ui-g-10">Your Cart</span>
-                <span class="ui-g-2 far fa-trash-alt"></span>
+                <span (click)="emptycart();" class="ui-g-2 far fa-trash-alt"></span>
               </span>
-              <span class="ui-g-12 no-bottom-pad">
-                <span class="ui-g-12 ui-g-nopad cart-content">
-                  <span class="ui-g-5">Chicken Starter</span>
-                  <span class="ui-g-3 item-count">x 3</span>
-                  <span class="ui-g-4">₹ 3000</span>
+              <span  class="ui-g-12 no-bottom-pad">
+                <span *ngFor="let key of cart" class="ui-g-12 ui-g-nopad cart-content">
+                  <span class="ui-g-5">{{key.name}}</span>
+                  <span class="ui-g-3 item-count">x {{key.count}}</span>
+                  <span class="ui-g-4">₹ {{key.count * key.price}}</span>
                 </span>
               </span>
               <span class="ui-g-12 no-top-pad">
                 <span class="ui-g-8 cart-total">Total:</span>
-                <span class="ui-g-4 cart-amt">₹ 3000</span>
+                <span class="ui-g-4 cart-amt">₹ {{gettotal()}}</span>
               </span>
               <span class="ui-g-12 text-center more-padding">
                 <button class="checkout">CHECKOUT</button>
