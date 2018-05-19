@@ -1,20 +1,135 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="ui-g-12 ui-g-nopad">
+  <div class="top-nav ui-g-12">
+    <span class="ui-g-1"></span>
+    <span class="ui-g-1">
+      Smart
+    </span>
+    <span class="ui-g-1">
+      Home
+    </span>
+    <span class="ui-g-1"></span>
+    <span class="ui-g-4"></span>
+    <span class="ui-g-2">
+      <span class="fas fa-user"></span>
+      examle@smart.com
+      <span class="fas fa-caret-down"></span>
+    </span>
+  </div>
+  <div class="ui-g-12 ui-g-nopad body-bg">
+    <div class="ui-g-12"></div>
+    <div class="ui-g-12 ui-g-nopad">
+      <div class="ui-g-1"></div>
+      <div class="ui-g-10 main-div">
+        <div class="ui-g-2 menu-list">
+          <ul>
+            <li [ngClass]="{'active': true}">
+              <span>All</span>
+            </li>
+            <li>
+              <span>Oriental</span>
+            </li>
+            <li>
+              <span>Chinese combos</span>
+            </li>
+            <li>
+              <span>Chinese Starter</span>
+            </li>
+            <li>
+              <span>Salads</span>
+            </li>
+          </ul>
+        </div>
+        <div class="ui-g-7 menu-div">
+          <div class="ui-g-12 ui-g-nopad">
+            <span class="ui-g-12 menu-title">Oriental</span>
+            <span class="ui-g-12 menu-content" *ngFor="let food of oriental">
+              <span class="ui-g-1 max-content ui-g-nopad">
+                <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
+              </span>
+              <span class="ui-g-7 ui-g-nopad">
+                <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
+                <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
+              </span>
+              <span class="ui-g-2 ui-g-nopad">
+                <span class="ui-g-3 far fa-minus-square"></span>
+                <span class="ui-g-7 food-count">2</span>
+                <span class="ui-g-2 far fa-plus-square"></span>
+              </span>
+              <span class="ui-g-2 ui-g-nopad text-center">
+                <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
+              </span>
+            </span>
+          </div>
+          <div class="ui-g-12 ui-g-nopad">
+            <span class="ui-g-12 menu-title">Chinese combos</span>
+            <span class="ui-g-12 menu-content" *ngFor="let food of cc">
+              <span class="ui-g-1 max-content ui-g-nopad">
+                <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
+              </span>
+              <span class="ui-g-7 ui-g-nopad">
+                <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
+                <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
+              </span>
+              <span class="ui-g-2 ui-g-nopad">
+                <span class="ui-g-3 far fa-minus-square"></span>
+                <span class="ui-g-7 food-count">2</span>
+                <span class="ui-g-2 far fa-plus-square"></span>
+              </span>
+              <span class="ui-g-2 ui-g-nopad text-center">
+                <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
+              </span>
+            </span>
+          </div>
+          <div class="ui-g-12 ui-g-nopad">
+            <span class="ui-g-12 menu-title">Chinese starter</span>
+            <span class="ui-g-12 menu-content" *ngFor="let food of cs">
+              <span class="ui-g-1 max-content ui-g-nopad">
+                <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
+              </span>
+              <span class="ui-g-7 ui-g-nopad">
+                <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
+                <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
+              </span>
+              <span class="ui-g-2 ui-g-nopad">
+                <span class="ui-g-3 far fa-minus-square"></span>
+                <span class="ui-g-7 food-count">2</span>
+                <span class="ui-g-2 far fa-plus-square"></span>
+              </span>
+              <span class="ui-g-2 ui-g-nopad text-center">
+                <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
+              </span>
+            </span>
+          </div>
+          <div class="ui-g-12 ui-g-nopad">
+            <span class="ui-g-12 menu-title">Salads</span>
+            <span class="ui-g-12 menu-content" *ngFor="let food of salads">
+              <span class="ui-g-1 max-content ui-g-nopad">
+                <span class="ui-g-12" [ngClass]="{'veg-flag': food.vegflag === 'veg', 'nonveg-flag': food.vegflag === 'nonveg'}"></span>
+              </span>
+              <span class="ui-g-7 ui-g-nopad">
+                <span class="food-name ui-g-12 ui-g-nopad">{{food.name}}</span>
+                <span class="food-desc ui-g-12 ui-g-nopad">{{food.description}}</span>
+              </span>
+              <span class="ui-g-2 ui-g-nopad">
+                <span class="ui-g-3 far fa-minus-square"></span>
+                <span class="ui-g-7 food-count">2</span>
+                <span class="ui-g-2 far fa-plus-square"></span>
+              </span>
+              <span class="ui-g-2 ui-g-nopad text-center">
+                <span class="ui-g-12 ui-g-nopad">₹ {{food.price}}</span>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="ui-g-3 cart-div ui-g-nopad">
+          <div class="ui-g-12 ui-g-nopad">
+            <span class="cart-title ui-g-12">
+              <span class="ui-g-10">Your Cart</span>
+              <span class="ui-g-2 far fa-trash-alt"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
